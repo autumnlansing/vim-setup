@@ -26,6 +26,9 @@ Plugin 'vim-scripts/AutoComplPop'
 Plugin 'tomtom/tcomment_vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'tpope/vim-surround'
+Plugin 'fatih/vim-go'
+Plugin 'motemen/xslate-vim'
+Plugin 'elixir-lang/vim-elixir'
 
 " Snipmate and dependencies
 Plugin 'tomtom/tlib_vim'
@@ -49,6 +52,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 
 set number
+set encoding=utf-8
+set tenc=utf8
 
 " Airline
 set laststatus=2
@@ -61,6 +66,7 @@ set go-=T
 set go-=r
 set go-=L
 
+" Syntax highlighting and theme
 syntax enable
 set t_Co=16
 let g:solarized_termcolors=16
@@ -71,6 +77,7 @@ colorscheme solarized
 map <C-n> :NERDTreeToggle<CR>
 "Close vim if NERDTree is only window open
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+"let g:NERDTreeDirArrows=0
 """""
 
 """"" PERL
@@ -85,6 +92,8 @@ set shiftwidth=4
 set expandtab
 set autoindent
 set cindent
+
+autocmd FileType ruby setlocal shiftwidth=2 tabstop=2
 
 " Hide buffer instead of close, allows to switch files without needing to save
 " or undo
@@ -106,6 +115,9 @@ nnoremap k gk
 nnoremap <up> g<up>
 nnoremap <down> g<down>
 
+" Set CtrlP to search by project
+let g:ctrlp_working_path = 'ra'
+
 " Sudo a file after it's opened
 cmap w!! w !sudo tee % >/dev/null
 
@@ -115,4 +127,3 @@ autocmd BufEnter * silent! lcd %:p:h
 " Map editing .vimrc and automatic sourcing when saved and close
 map <leader>vimrc :e ~/.vimrc<cr>
 autocmd bufwritepost .vimrc source $MYVIMRC | AirlineRefresh
-"map <leader>sv source %MYVIMRC
